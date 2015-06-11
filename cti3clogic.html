@@ -2,8 +2,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script type="text/javascript" src="https://partner3clogic.service-now.com/scripts/com.sn_open_frame/openFrame.js"></script>
-		<script type="text/javascript" src="https://partner3clogic.service-now.com/scripts/doctype/CustomEventManager.js"></script>
+		<script type="text/javascript" src="https://rawgit.com/openmason/cti/master/openFrame.min.js"></script>
         <style>
             body {font-family: Arial;font-size: 13px; color: rgb(52, 61, 71);}
             div {margin-bottom:5px;}
@@ -107,9 +106,6 @@
             function initSuccess(snConfig) {
                 openFrameAPI.log(openFrameAPI.LOG_LEVELS.DEBUG, "OpenFrame init successful, lets continue to register events of interest...");
                 
-                //central event dispatcher
-                openFrameAPI.subscribeAll(genericHandler);
-    
                 //register for all communication events
                 openFrameAPI.subscribe(openFrameAPI.EVENTS.COMMUNICATION_EVENT, handleCommunicationEvent);
     
@@ -187,24 +183,6 @@
                     //show mute
                     var iconList = [ {imageURL:"/images/com.sn_open_frame/mute.png", imageTitle:"mute", id:100} ];
                     openFrameAPI.setIcons(iconList);
-                }
-            }
-            
-            //TODO: not implemented
-            function genericHandler(event, context) {
-                switch(event) {
-                    case openFrameAPI.EVENTS.HEADER_ICON_CLICKED:
-                        console.log('OpenFrame header icon clicked...');
-                    case openFrameAPI.EVENTS.OPENFRAME_VISIBLE:
-                        console.log('OpenFrame visible...');
-                    case openFrameAPI.EVENTS.OPENFRAME_HIDDEN:
-                        console.log('OpenFrame hidden...');
-                    case openFrameAPI.EVENTS.OPENFRAME_BEFORE_DESTROY:
-                        console.log('OpenFrame destroyed...');
-                    case openFrameAPI.EVENTS.COMMUNICATION_EVENT:
-                        console.log('OpenFrame communication event');
-                    case openFrameAPI.EVENTS.COMMUNICATION_FAILURE:
-                        console.log('OpenFrame communication failure');
                 }
             }
             
